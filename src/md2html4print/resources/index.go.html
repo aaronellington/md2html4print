@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>{{.Title}}</title>
+
+		<style>
+			* {
+				font-family: sans-serif;
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			ol, ul {
+				padding-left: 2rem;
+			}
+
+			li {
+				margin-bottom: .5rem;
+			}
+
+			code {
+				background: #eee;
+				font-family: monospace;
+				padding: .25rem;
+				border: 1px solid #bbb;
+				border-radius: .25rem;
+			}
+
+			li ul,
+			li ol {
+				margin-top: .5rem;
+			}
+
+			h1 {
+				text-align: center;
+			}
+
+			article {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+			}
+
+			article h1 {
+				font-size: 2.5rem;
+				border-bottom: 2px solid black;
+			}
+
+			article h2 {
+				font-size: 1.5rem;
+			}
+
+			article h3 {
+				font-size: 1rem;
+			}
+
+			article h4 {
+				font-size: 1rem;
+			}
+
+			article table {
+				border: 2px solid black;
+				border-collapse: collapse;
+			}
+
+			article table th,
+			article table td {
+				padding: .5rem;
+				text-align: left;
+				border: 1px solid black;
+			}
+
+			html,body {
+				font-size: 11pt;
+			}
+
+			@media print {
+				@page {
+					size: {{.PageSize}};
+					margin: 2cm;
+				}
+
+				#pages > * {
+					page-break-after: always;
+				}
+			}
+
+			@media screen {
+				body {
+					margin: 3rem;
+					background: #999;
+				}
+
+				#pages {
+					display:flex;
+					gap: 3rem;
+					flex-direction: column;
+					align-items: center;
+				}
+
+				#pages > * {
+					background: white;
+					padding: 5rem;
+					min-height: 11in;
+					width: 8.5in;
+					border-radius: 8px;
+					box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.5);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="pages">
+			<article id="title-page">
+				<h1>{{.Title}}</h1>
+				<ul>
+					{{range .Pages}}
+						<li>
+							<a href="#{{.FrontMatter.Slug}}">{{.FrontMatter.Title}}</a>
+						</li>
+					{{end}}
+				</ul>
+			</article>
+			{{range .Pages}}
+				<article id="{{.FrontMatter.Slug}}">
+					<h1>{{.FrontMatter.Title}}</h1>
+					{{.HTML}}
+				</article>
+			{{end}}
+		</div>
+	</body>
+</html>

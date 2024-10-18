@@ -1,0 +1,4 @@
+{
+	"prettierignore": ["*.go.html"],
+	"gitignore": ["demo/src/index.*"]
+}

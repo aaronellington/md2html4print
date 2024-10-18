@@ -1,0 +1,10 @@
+# Defaults
+/node_modules/
+*.js
+*.jsx
+*.ts
+*.tsx
+.next
+
+# Project Specific
+*.go.html
